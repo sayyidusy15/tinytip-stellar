@@ -32,6 +32,18 @@ This document provides submission verification details for **TinyTip** for the *
 
 ---
 
+## Visual Assets Summary
+
+- **Landing Page**: `public/landing-page.png`
+- **Explore Creators**: `public/explore-creators.png`
+- **Creator Profile & Micro-Tip Modal**: `public/creator-view.png`
+- **Creator Dashboard**: `public/dashboard.png`
+- **Connect Wallet (Freighter & Manual)**: `public/connect-wallet.png`
+- **CI/CD Pipeline**: `public/cicd-pipeline.png`
+- **Cargo Test Output**: `public/cargo-test.png`
+
+---
+
 ## Contract Metadata
 - **Contract Address**: `CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH`
 - **Network**: Stellar Soroban Testnet
