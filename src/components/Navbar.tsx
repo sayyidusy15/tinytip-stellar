@@ -34,7 +34,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-7 text-xs font-semibold text-[#64748b]">
+        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-7 text-xs font-semibold text-[#64748b]">
           <Link href="/" className="hover:text-[#1a202c] transition-colors">
             Home
           </Link>
@@ -44,7 +44,7 @@ export default function Navbar() {
           <Link href="/dashboard" className="hover:text-[#1a202c] transition-colors">
             Dashboard
           </Link>
-        </div>
+        </nav>
 
         {/* Desktop Action Buttons */}
         <div className="hidden md:flex items-center gap-3">
