@@ -25,11 +25,13 @@ export function getServer(): rpc.Server {
 
 // Convert XLM amount to Stroops (1 XLM = 10_000_000 Stroops)
 export function xlmToStroops(xlm: number): bigint {
+  if (!Number.isFinite(xlm) || xlm < 0) return BigInt(0);
   return BigInt(Math.round(xlm * 10_000_000));
 }
 
 // Convert Stroops to XLM
 export function stroopsToXlm(stroops: bigint | number): number {
+  if (typeof stroops === "number" && (!Number.isFinite(stroops) || stroops < 0)) return 0;
   return Number(stroops) / 10_000_000;
 }
 
