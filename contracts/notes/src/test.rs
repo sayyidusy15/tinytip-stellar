@@ -1,7 +1,7 @@
 #![cfg(test)]
 
 use super::*;
-use soroban_sdk::{testutils::Address as _, Address, Env, String};
+use soroban_sdk::{testutils::Address as _, testutils::Events as _, Address, Env, String};
 
 #[test]
 fn test_register_and_get_creator() {
@@ -155,4 +155,33 @@ fn test_multiple_tips_accumulation() {
 
     let recent = client.get_recent_tips();
     assert_eq!(recent.len(), 3);
+}
+
+#[test]
+fn test_event_emission_on_tip() {
+    let env = Env::default();
+    env.mock_all_auths();
+
+    let contract_id = env.register(TinyTipContract, ());
+    let client = TinyTipContractClient::new(&env, &contract_id);
+
+    let creator_wallet = Address::generate(&env);
+    let username = String::from_str(&env, "event_creator");
+
+    client.register_creator(
+        &username,
+        &String::from_str(&env, "Event Creator"),
+        &String::from_str(&env, "Bio"),
+        &creator_wallet,
+    );
+
+    let donor = Address::generate(&env);
+    client.send_tip(
+        &donor,
+        &username,
+        &10_0000000_u128,
+        &String::from_str(&env, "Testing events"),
+    );
+
+    let _events = env.events().all();
 }
