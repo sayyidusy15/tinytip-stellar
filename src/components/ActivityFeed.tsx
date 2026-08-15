@@ -20,6 +20,7 @@ export default function ActivityFeed({ tips }: ActivityFeedProps) {
       {tips.map((tip, idx) => (
         <div
           key={Number(tip.id) || idx}
+          aria-label={`Micro-tip from ${shortenAddress(tip.donor)} to ${tip.creatorUsername}`}
           className="matte-card p-4 flex items-center justify-between gap-3"
         >
           <div className="flex items-center gap-3">
