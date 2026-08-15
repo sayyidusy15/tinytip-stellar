@@ -12,7 +12,7 @@ export default function Footer() {
           </span>
         </div>
 
-        <div className="flex items-center gap-6 text-[#64748b]">
+        <nav aria-label="Footer Navigation" className="flex items-center gap-6 text-[#64748b]">
           <Link href="/explore" className="hover:text-[#1a202c] transition-colors">
             Explore
           </Link>
@@ -28,7 +28,7 @@ export default function Footer() {
           >
             Stellar Network ↗
           </a>
-        </div>
+        </nav>
       </div>
     </footer>
   );
