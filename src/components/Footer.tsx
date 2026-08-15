@@ -4,9 +4,9 @@ export default function Footer() {
   return (
     <footer className="mt-auto border-t border-[#1b2636] bg-[#080c11] py-8 px-4 sm:px-8 text-xs text-[#6e8096]">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
           <span className="font-bold text-white">TinyTip</span>
-          <span>— Micro-support platform powered by</span>
+          <span>— Micro-support powered by</span>
           <span className="px-2 py-0.5 rounded bg-[#5d750f]/15 border border-[#5d750f]/30 text-[#7a9a14] font-semibold">
             Stellar Soroban
           </span>

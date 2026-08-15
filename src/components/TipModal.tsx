@@ -31,7 +31,7 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
     setErrorMsg(null);
 
     try {
-      const activeState = await getActiveWalletAddress();
+      const activeState = getActiveWalletAddress();
 
       if (activeState.isViewOnly) {
         setErrorMsg("You are currently in View-Only mode. Please connect via Freighter Extension to sign micro-tips.");
@@ -163,7 +163,7 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
               <label className="text-xs font-medium text-[#9eb2c9] block mb-2">
                 Select Micro-Tip Amount:
               </label>
-              <div className="grid grid-cols-5 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                 {PRESETS.map((preset) => (
                   <button
                     key={preset.label}

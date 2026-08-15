@@ -7,14 +7,14 @@ import { getActiveWalletAddress, shortenAddress } from "@/lib/stellar";
 export default function Navbar() {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [isViewOnly, setIsViewOnly] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    getActiveWalletAddress().then(({ address, isViewOnly }) => {
-      if (address) {
-        setWalletAddress(address);
-        setIsViewOnly(isViewOnly);
-      }
-    });
+    const { address, isViewOnly } = getActiveWalletAddress();
+    if (address) {
+      setWalletAddress(address);
+      setIsViewOnly(isViewOnly);
+    }
   }, []);
 
   return (
@@ -33,7 +33,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-7 text-xs font-semibold text-[#a3b3c7]">
           <Link href="/" className="hover:text-white transition-colors">
             Home
@@ -46,11 +46,11 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-3">
+        {/* Desktop Action Buttons */}
+        <div className="hidden md:flex items-center gap-3">
           <Link
             href="/create-profile"
-            className="hidden sm:inline-flex px-4 py-2 rounded-full text-xs font-medium text-[#c0cfdf] bg-[#121924] hover:bg-[#182333] border border-[#233347] transition-all"
+            className="inline-flex px-4 py-2 rounded-full text-xs font-medium text-[#c0cfdf] bg-[#121924] hover:bg-[#182333] border border-[#233347] transition-all"
           >
             + Become Creator
           </Link>
@@ -76,7 +76,73 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+
+        {/* Mobile: Wallet + Hamburger */}
+        <div className="flex md:hidden items-center gap-2">
+          {walletAddress ? (
+            <Link
+              href="/connect"
+              className="flex items-center gap-1.5 bg-[#121924] border border-[#233347] px-2.5 py-1.5 rounded-full"
+            >
+              <div className={`w-2 h-2 rounded-full ${isViewOnly ? "bg-amber-400" : "bg-emerald-400 animate-pulse"}`} />
+              <span className="font-mono text-[11px] font-semibold text-white">
+                {shortenAddress(walletAddress)}
+              </span>
+            </Link>
+          ) : (
+            <Link
+              href="/connect"
+              className="olive-button text-[11px] px-3 py-1.5 flex items-center gap-1"
+            >
+              Connect →
+            </Link>
+          )}
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-lg bg-[#121924] border border-[#233347]"
+            aria-label="Toggle menu"
+          >
+            <span className={`block w-4 h-[1.5px] bg-[#a3b3c7] transition-transform ${mobileMenuOpen ? "rotate-45 translate-y-[3.5px]" : ""}`} />
+            <span className={`block w-4 h-[1.5px] bg-[#a3b3c7] transition-opacity ${mobileMenuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-4 h-[1.5px] bg-[#a3b3c7] transition-transform ${mobileMenuOpen ? "-rotate-45 -translate-y-[3.5px]" : ""}`} />
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden mt-3 pb-2 border-t border-[#1b2636] pt-4 space-y-1">
+          <Link
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2.5 rounded-xl text-xs font-semibold text-[#a3b3c7] hover:text-white hover:bg-[#121924] transition-all"
+          >
+            Home
+          </Link>
+          <Link
+            href="/explore"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2.5 rounded-xl text-xs font-semibold text-[#a3b3c7] hover:text-white hover:bg-[#121924] transition-all"
+          >
+            Explore Creators
+          </Link>
+          <Link
+            href="/dashboard"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2.5 rounded-xl text-xs font-semibold text-[#a3b3c7] hover:text-white hover:bg-[#121924] transition-all"
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/create-profile"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2.5 rounded-xl text-xs font-semibold text-[#7a9a14] hover:bg-[#121924] transition-all"
+          >
+            + Become Creator
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

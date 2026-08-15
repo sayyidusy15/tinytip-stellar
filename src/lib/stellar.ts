@@ -4,6 +4,7 @@ import {
   setAllowed as freighterSetAllowed,
   getAddress as freighterGetAddress,
   isConnected as freighterIsConnected,
+  requestAccess as freighterRequestAccess,
 } from "@stellar/freighter-api";
 
 export const STELLAR_NETWORK = "testnet" as const;
@@ -73,19 +74,39 @@ export interface Tip {
 // Check Freighter Connection or trigger install redirect
 export async function connectFreighterWallet(): Promise<{ success: boolean; address?: string; isInstalled: boolean }> {
   try {
-    const isConnected = await freighterIsConnected();
-    if (!isConnected) {
+    // v5 API: isConnected() returns { isConnected: boolean }
+    const connResult = await freighterIsConnected();
+    const connected = typeof connResult === "object" ? connResult.isConnected : !!connResult;
+
+    if (!connected) {
       return { success: false, isInstalled: false };
     }
 
-    const allowed = await freighterIsAllowed();
+    // v5 API: isAllowed() returns { isAllowed: boolean }
+    const allowedResult = await freighterIsAllowed();
+    const allowed = typeof allowedResult === "object" ? allowedResult.isAllowed : !!allowedResult;
+
     if (!allowed) {
-      const isOk = await freighterSetAllowed();
-      if (!isOk) return { success: false, isInstalled: true };
+      // Use requestAccess() to prompt user in extension popup
+      try {
+        const accessResult = await freighterRequestAccess();
+        const accessAddr = typeof accessResult === "object" ? accessResult.address : accessResult;
+        if (accessAddr && isValidStellarAddress(accessAddr)) {
+          if (typeof window !== "undefined") {
+            localStorage.setItem("tinytip_wallet", accessAddr);
+            localStorage.setItem("tinytip_wallet_mode", "freighter");
+          }
+          return { success: true, address: accessAddr, isInstalled: true };
+        }
+      } catch {
+        // User rejected the access request
+        return { success: false, isInstalled: true };
+      }
     }
 
+    // Already allowed — get the address
     const info = await freighterGetAddress();
-    const address = typeof info === "string" ? info : info?.address;
+    const address = typeof info === "object" ? info.address : info;
 
     if (address && isValidStellarAddress(address)) {
       if (typeof window !== "undefined") {
@@ -101,8 +122,8 @@ export async function connectFreighterWallet(): Promise<{ success: boolean; addr
   }
 }
 
-// Get saved wallet address from localStorage or Freighter
-export async function getActiveWalletAddress(): Promise<{ address: string | null; isViewOnly: boolean }> {
+// Get saved wallet address from localStorage only (passive — never triggers Freighter popup)
+export function getActiveWalletAddress(): { address: string | null; isViewOnly: boolean } {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem("tinytip_wallet");
     const mode = localStorage.getItem("tinytip_wallet_mode");
@@ -110,13 +131,6 @@ export async function getActiveWalletAddress(): Promise<{ address: string | null
       return { address: saved, isViewOnly: mode === "view_only" };
     }
   }
-
-  // Fallback to checking freighter
-  const res = await connectFreighterWallet();
-  if (res.success && res.address) {
-    return { address: res.address, isViewOnly: false };
-  }
-
   return { address: null, isViewOnly: false };
 }
 

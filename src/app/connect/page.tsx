@@ -22,12 +22,11 @@ export default function ConnectPage() {
   const [isViewOnly, setIsViewOnly] = useState(false);
 
   useEffect(() => {
-    getActiveWalletAddress().then(({ address, isViewOnly }) => {
-      if (address) {
-        setActiveAddress(address);
-        setIsViewOnly(isViewOnly);
-      }
-    });
+    const { address, isViewOnly } = getActiveWalletAddress();
+    if (address) {
+      setActiveAddress(address);
+      setIsViewOnly(isViewOnly);
+    }
   }, []);
 
   const handleConnectFreighter = async () => {

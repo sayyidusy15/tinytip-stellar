@@ -10,12 +10,11 @@ export default function DashboardPage() {
   const [isViewOnly, setIsViewOnly] = useState(false);
 
   useEffect(() => {
-    getActiveWalletAddress().then(({ address, isViewOnly }) => {
-      if (address) {
-        setWalletAddress(address);
-        setIsViewOnly(isViewOnly);
-      }
-    });
+    const { address, isViewOnly } = getActiveWalletAddress();
+    if (address) {
+      setWalletAddress(address);
+      setIsViewOnly(isViewOnly);
+    }
   }, []);
 
   const creatorStats = {
