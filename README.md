@@ -1,5 +1,3 @@
-a
-
 <div align="center">
   <span style="font-size: 64px;">✨</span>
   <h1>TinyTip</h1>
@@ -19,6 +17,27 @@ Instead of traditional crowdfunding or credit-card payment gateways that charge 
 > TinyTip is designed specifically for **Stellar Journey to Mastery (Builder & Startup Tracks)**. Every micro-support tip generates a real-time, on-chain Soroban transaction, updating creator statistics and emitting `TIP_RECEIVED` events on Stellar Testnet.
 
 [Contract Explorer](https://stellar.expert/explorer/testnet/contract/CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH) · [Stellar Lab](https://lab.stellar.org/r/testnet/contract/CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH) · [Contract Source](contracts/notes/src/lib.rs)
+
+---
+
+## Screenshots & Visual Overview
+
+### 🎨 User Interface Highlights
+
+| Halaman / Fitur | Preview | Deskripsi |
+|---|---|---|
+| **Landing Page** | ![Landing Page](public/landing-page.png) | Halaman utama dengan hero section, metrik real-time Stellar, daftar featured creators, dan activity feed. |
+| **Explore Creators** | ![Explore Creators](public/explore-creators.png) | Katalog pencarian kreator berbasis kata kunci, nama, atau username `@` dengan kartu interaktif. |
+| **Creator Profile & Tip Modal** | ![Creator View](public/creator-view.png) | Profil publik kreator dengan statistik total diterima, statistik pendukung, dan preset micro-tip ($0.05 - $1.00). |
+| **Creator Dashboard** | ![Dashboard](public/dashboard.png) | Dashboard analitik kreator untuk memantau total tip, rata-rata micro-tip, dan link publik yang bisa disebar. |
+| **Connect Wallet** | ![Connect Wallet](public/connect-wallet.png) | Alur koneksi wallet Freighter otomatis & mode *View-Only* manual entry tanpa perlu ekstensi. |
+
+### 🛠️ Technical & CI/CD Verification
+
+| Jenis Bukti | Preview | Keterangan |
+|---|---|---|
+| **GitHub Actions CI/CD Pipeline** | ![CI/CD Pipeline](public/cicd-pipeline.png) | Workflow otomatis `Smart Contract CI` berstatus **SUCCESS (Ceklis Hijau `✓`)** pada setiap push ke branch `main`. |
+| **Cargo Test Output (5 Passed)** | ![Cargo Test Output](public/cargo-test.png) | Output pengujian unit test Rust Soroban di terminal dengan **5 unit test passed (100% lulus)** tanpa warning. |
 
 ---
 
@@ -103,7 +122,7 @@ flowchart LR
 
 ### Stack
 
-- **Frontend:** Next.js 16 (App Router), React 19, Tailwind CSS v4, Glassmorphic UI design.
+- **Frontend:** Next.js 16 (App Router), React 19, Tailwind CSS v4, Light mode UI design system.
 - **Wallet Integration:** `@stellar/freighter-api` on Stellar Testnet.
 - **Stellar SDK:** `@stellar/stellar-sdk` v14 (Soroban RPC integration).
 - **Smart Contract:** Soroban Rust Contract in `contracts/notes`.
@@ -143,7 +162,7 @@ Soroban Rust contract exported functions:
 | Method               | Parameters                                   | Description                                                |
 | -------------------- | -------------------------------------------- | ---------------------------------------------------------- |
 | `register_creator` | `username, name, bio, wallet`              | Registers a creator profile on-chain                       |
-| `send_tip`         | `donor, creator_username, amount, message` | Executes tip, updates stats, & emits`TIP_RECEIVED` event |
+| `send_tip`         | `donor, creator_username, amount, message` | Executes tip, updates stats, & emits `TIP_RECEIVED` event  |
 | `get_creator`      | `username`                                 | Retrieves profile stats for a specific creator             |
 | `get_all_creators` | None                                         | Returns all registered creator profiles                    |
 | `get_recent_tips`  | None                                         | Returns latest tip records across the platform             |
@@ -164,14 +183,14 @@ Soroban Rust contract exported functions:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/tinytip.git
-cd tinytip
+git clone https://github.com/sayyidusy15/tinytip-stellar.git
+cd tinytip-stellar
 
 # Install dependencies
 npm install
 
 # Run smart contract unit tests
-cargo test --manifest-path contracts/notes/Cargo.toml
+npm run test:contract
 
 # Build smart contract WASM
 stellar contract build --manifest-path contracts/notes/Cargo.toml
@@ -201,8 +220,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 Run from project root:
 
 ```bash
-# Run Rust smart contract tests
-cargo test --manifest-path contracts/notes/Cargo.toml
+# Run Rust smart contract unit tests
+npm run test:contract
 
 # Run Next.js production build check
 npm run build
@@ -210,13 +229,13 @@ npm run build
 
 Expected results:
 
-| Check                      | Status  | Details                                                                |
-| -------------------------- | ------- | ---------------------------------------------------------------------- |
-| Soroban Rust Unit Tests    | ✅ Pass | 2 passing tests (`test_register_and_get_creator`, `test_send_tip`) |
-| WASM Contract Compilation  | ✅ Pass | `notes.wasm` (6,655 bytes) compiled cleanly                          |
-| Stellar Testnet Deployment | ✅ Pass | Deployed to`CA54Q...PSDH` via `sayyidusy`                          |
-| TypeScript Typecheck       | ✅ Pass | 0 errors                                                               |
-| Next.js Production Build   | ✅ Pass | 6 static & dynamic pages rendered cleanly                              |
+| Check                      | Status  | Details                                                                    |
+| -------------------------- | ------- | -------------------------------------------------------------------------- |
+| Soroban Rust Unit Tests    | ✅ Pass | 5 passing tests (`test_register_and_get_creator`, `test_send_tip`, etc.)  |
+| WASM Contract Compilation  | ✅ Pass | `notes.wasm` (6,655 bytes) compiled cleanly                              |
+| Stellar Testnet Deployment | ✅ Pass | Deployed to `CA54Q...PSDH` via `sayyidusy`                                 |
+| TypeScript Typecheck       | ✅ Pass | 0 errors                                                                   |
+| Next.js Production Build   | ✅ Pass | 7 static & dynamic pages rendered cleanly                                  |
 
 ---
 
@@ -228,15 +247,24 @@ inventory-dapps/
 │   └── notes/                  # Soroban smart contract source (Rust)
 │       ├── src/
 │       │   ├── lib.rs          # Contract impl (register_creator, send_tip)
-│       │   └── test.rs         # Soroban contract unit tests
+│       │   └── test.rs         # 5 Soroban contract unit tests
 │       └── Cargo.toml
+├── public/                     # Public image assets & submission screenshots
+│   ├── cargo-test.png
+│   ├── cicd-pipeline.png
+│   ├── connect-wallet.png
+│   ├── creator-view.png
+│   ├── dashboard.png
+│   ├── explore-creators.png
+│   └── landing-page.png
 ├── src/
 │   ├── app/
+│   │   ├── connect/            # Dedicated connect wallet page (/connect)
 │   │   ├── create-profile/     # Creator onboarding page (/create-profile)
 │   │   ├── creator/[username]/ # Individual creator profile page (/creator/ahan)
 │   │   ├── dashboard/          # Creator analytics dashboard (/dashboard)
 │   │   ├── explore/            # Creator search directory (/explore)
-│   │   ├── globals.css         # Glassmorphic Tailwind 4 styling
+│   │   ├── globals.css         # Light mode Tailwind 4 styling
 │   │   ├── layout.tsx          # Root layout & Navbar
 │   │   └── page.tsx            # Home page hero & activity feed
 │   ├── components/             # Navbar, Footer, CreatorCard, TipModal, ActivityFeed
