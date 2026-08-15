@@ -151,6 +151,7 @@ impl TinyTipContract {
         env.storage().instance().set(&TIPS, &tips);
 
         // Emit Contract Event
+        #[allow(deprecated)]
         env.events().publish(
             (symbol_short!("TIP"), creator_username),
             (donor, amount, timestamp),
