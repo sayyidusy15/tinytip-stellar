@@ -36,7 +36,6 @@ export default function ConnectPage() {
     const res = await connectFreighterWallet();
 
     if (!res.isInstalled) {
-      // Extension not installed, open Freighter website
       window.open("https://www.freighter.app/", "_blank", "noopener,noreferrer");
       setAddressError("Freighter extension not found. Redirecting to freighter.app to install...");
       setConnecting(false);
@@ -77,35 +76,35 @@ export default function ConnectPage() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-10 px-4">
-      <div className="w-full max-w-lg bg-[#0c1117] border border-[#1b2636] rounded-3xl p-8 sm:p-10 shadow-2xl space-y-7 relative">
+      <div className="w-full max-w-lg bg-white border border-[#e2e8f0] rounded-3xl p-8 sm:p-10 shadow-lg space-y-7 relative">
         {/* Top Header */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1a202c] tracking-tight">
               Connect your wallet
             </h1>
             <Link
               href="/"
-              className="text-zinc-500 hover:text-white text-xs font-semibold px-3 py-1 rounded-full bg-[#131b26] border border-[#1e2a3b] transition-colors"
+              className="text-[#94a3b8] hover:text-[#1a202c] text-xs font-semibold px-3 py-1 rounded-full bg-[#f1f5f9] border border-[#e2e8f0] transition-colors"
             >
               ✕ Close
             </Link>
           </div>
-          <p className="text-xs sm:text-sm text-[#8c9cb0] leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
             Connect your Stellar wallet to start routing your income automatically. You always retain full control of your funds.
           </p>
         </div>
 
         {/* Connected State Banner */}
         {activeAddress ? (
-          <div className="bg-[#121c27] border border-[#1f2e42] rounded-2xl p-5 space-y-4">
+          <div className="bg-[#f8faf8] border border-[#d4ecd4] rounded-2xl p-5 space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[#8c9cb0]">Connected Wallet</span>
-              <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${isViewOnly ? "bg-amber-500/10 text-amber-400 border border-amber-500/30" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"}`}>
+              <span className="text-xs text-[#64748b]">Connected Wallet</span>
+              <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${isViewOnly ? "bg-amber-50 text-amber-700 border border-amber-200" : "bg-emerald-50 text-emerald-700 border border-emerald-200"}`}>
                 {isViewOnly ? "View-Only Mode" : "Freighter Active"}
               </span>
             </div>
-            <div className="font-mono text-sm text-white font-bold break-all">
+            <div className="font-mono text-sm text-[#1a202c] font-bold break-all">
               {activeAddress}
             </div>
             <div className="flex gap-3 pt-1">
@@ -117,7 +116,7 @@ export default function ConnectPage() {
               </Link>
               <button
                 onClick={handleDisconnect}
-                className="secondary-pill-button px-4 py-2.5 text-xs text-rose-400 hover:text-rose-300"
+                className="secondary-pill-button px-4 py-2.5 text-xs text-rose-600 hover:text-rose-700"
               >
                 Disconnect
               </button>
@@ -142,7 +141,7 @@ export default function ConnectPage() {
                   </>
                 )}
               </button>
-              <p className="text-[11px] text-[#718298] text-center mt-2 font-medium">
+              <p className="text-[11px] text-[#94a3b8] text-center mt-2 font-medium">
                 Freighter · Albedo · xBull supported
               </p>
             </div>
@@ -166,19 +165,19 @@ export default function ConnectPage() {
                     setAddressError(null);
                   }}
                   placeholder="G... Stellar public address"
-                  className="input-field w-full px-4 py-3 text-xs font-mono placeholder-[#58687d]"
+                  className="input-field w-full px-4 py-3 text-xs font-mono placeholder-[#94a3b8]"
                 />
 
                 <button
                   type="submit"
-                  className="secondary-pill-button w-full py-3.5 text-xs flex items-center justify-center gap-2 text-white bg-[#1a2533] border-[#293b52] hover:bg-[#212f42]"
+                  className="secondary-pill-button w-full py-3.5 text-xs flex items-center justify-center gap-2 text-[#475569] bg-[#f1f5f9] border-[#e2e8f0] hover:bg-[#e8ecf1]"
                 >
                   <span>Use this address (view mode)</span>
                   <span>→</span>
                 </button>
 
                 {addressError && (
-                  <div className="p-3.5 rounded-2xl bg-[#2a1114] border border-[#5c1a20] text-rose-400 text-xs text-center font-medium">
+                  <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs text-center font-medium">
                     {addressError}
                   </div>
                 )}
@@ -188,29 +187,29 @@ export default function ConnectPage() {
         )}
 
         {/* Ecosystem Logos Footer */}
-        <div className="pt-6 border-t border-[#182333] space-y-3">
-          <span className="text-[10px] font-mono font-bold tracking-widest text-[#5c6e85] uppercase block">
+        <div className="pt-6 border-t border-[#e8ecf1] space-y-3">
+          <span className="text-[10px] font-mono font-bold tracking-widest text-[#94a3b8] uppercase block">
             Supported Ecosystem
           </span>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#8697ac]">
-            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#94a3b8]">
+            <div className="flex items-center gap-1.5 hover:text-[#1a202c] transition-colors">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span>Stellar</span>
             </div>
-            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-[#1a202c] transition-colors">
               <span>◆ Soroban</span>
             </div>
-            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-[#1a202c] transition-colors">
               <span>settle</span>
             </div>
-            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-[#1a202c] transition-colors">
               <span>🚀 Freighter</span>
             </div>
-            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-[#1a202c] transition-colors">
               <span>Albedo</span>
             </div>
-            <div className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <div className="flex items-center gap-1.5 hover:text-[#1a202c] transition-colors">
               <span>USDC</span>
             </div>
           </div>

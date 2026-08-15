@@ -2,21 +2,21 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-[#1b2636] bg-[#080c11] py-8 px-4 sm:px-8 text-xs text-[#6e8096]">
+    <footer className="mt-auto border-t border-[#e2e8f0] bg-white py-8 px-4 sm:px-8 text-xs text-[#94a3b8]">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-          <span className="font-bold text-white">TinyTip</span>
+          <span className="font-bold text-[#1a202c]">TinyTip</span>
           <span>— Micro-support powered by</span>
-          <span className="px-2 py-0.5 rounded bg-[#5d750f]/15 border border-[#5d750f]/30 text-[#7a9a14] font-semibold">
+          <span className="px-2 py-0.5 rounded bg-[#f0fdf0] border border-[#d4ecd4] text-[#5d750f] font-semibold">
             Stellar Soroban
           </span>
         </div>
 
-        <div className="flex items-center gap-6 text-[#8b9cb0]">
-          <Link href="/explore" className="hover:text-white transition-colors">
+        <div className="flex items-center gap-6 text-[#64748b]">
+          <Link href="/explore" className="hover:text-[#1a202c] transition-colors">
             Explore
           </Link>
-          <Link href="/create-profile" className="hover:text-white transition-colors">
+          <Link href="/create-profile" className="hover:text-[#1a202c] transition-colors">
             Join as Creator
           </Link>
 
@@ -24,7 +24,7 @@ export default function Footer() {
             href="https://stellar.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#7a9a14] transition-colors flex items-center gap-1"
+            className="hover:text-[#5d750f] transition-colors flex items-center gap-1"
           >
             Stellar Network ↗
           </a>

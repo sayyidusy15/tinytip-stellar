@@ -2,12 +2,12 @@
 
 @layer base {
   :root {
-    --background: #0b0f14;
-    --card: #121820;
-    --card-hover: #161e29;
-    --border: #1e2936;
-    --foreground: #f0f4f8;
-    --muted: #8a99ad;
+    --background: #f7f8fa;
+    --card: #ffffff;
+    --card-hover: #f2f4f7;
+    --border: #e2e8f0;
+    --foreground: #1a202c;
+    --muted: #64748b;
     --accent-olive: #5d750f;
     --accent-olive-hover: #4e630c;
     --accent-olive-light: #7a9a14;
@@ -25,21 +25,24 @@
 }
 
 .matte-card {
-  background-color: #121820;
-  border: 1px solid #1e2e3f;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .matte-card-interactive {
-  background-color: #121820;
-  border: 1px solid #1e2e3f;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 }
 
 .matte-card-interactive:hover {
-  background-color: #161f2c;
-  border-color: #2a3e54;
+  background-color: #f8f9fb;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .olive-button {
@@ -52,33 +55,39 @@
 
 .olive-button:hover {
   background-color: #4e630c;
-  box-shadow: 0 4px 16px rgba(93, 117, 15, 0.3);
+  box-shadow: 0 4px 16px rgba(93, 117, 15, 0.25);
+}
+
+.olive-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .secondary-pill-button {
-  background-color: #151d27;
-  border: 1px solid #27364a;
-  color: #d1dbe5;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #334155;
   font-weight: 500;
   border-radius: 9999px;
   transition: all 0.15s ease;
 }
 
 .secondary-pill-button:hover {
-  background-color: #1c2735;
-  border-color: #354963;
-  color: #ffffff;
+  background-color: #e8ecf1;
+  border-color: #cbd5e1;
+  color: #1a202c;
 }
 
 .input-field {
-  background-color: #0b1017;
-  border: 1px solid #223244;
+  background-color: #f8f9fb;
+  border: 1px solid #e2e8f0;
   border-radius: 0.875rem;
-  color: #f0f4f8;
+  color: #1a202c;
   transition: border-color 0.15s ease;
 }
 
 .input-field:focus {
   outline: none;
   border-color: #5d750f;
+  box-shadow: 0 0 0 3px rgba(93, 117, 15, 0.1);
 }

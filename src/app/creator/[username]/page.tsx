@@ -18,7 +18,7 @@ export default function CreatorProfilePage({ params }: PageProps) {
     name: username === "ahan" ? "Ahan" : username,
     bio: "Building open-source developer tools, Stellar smart contract tutorials, and decentralized infrastructure.",
     wallet: "GAMCB2RP4WONAMRUQA5DG342TDACC4TYEIHOAO5JD7BN2HL4EK3TCBY2",
-    totalReceived: BigInt(874_2000000), // 87.42 XLM
+    totalReceived: BigInt(874_2000000),
     supporterCount: 342,
     tipCount: 421,
   };
@@ -48,15 +48,15 @@ export default function CreatorProfilePage({ params }: PageProps) {
       <div className="matte-card p-8 space-y-6 relative overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-[#1c2838] border border-[#2b3d54] flex items-center justify-center text-2xl font-bold text-white">
+            <div className="w-16 h-16 rounded-2xl bg-[#f0fdf0] border border-[#d4ecd4] flex items-center justify-center text-2xl font-bold text-[#5d750f]">
               {creator.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">{creator.name}</h1>
-              <p className="text-xs font-mono text-[#7a9a14] font-semibold mb-2">@{creator.username}</p>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0b1017] border border-[#1b2636] text-[11px] font-mono text-[#8ca0b8]">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1a202c]">{creator.name}</h1>
+              <p className="text-xs font-mono text-[#5d750f] font-semibold mb-2">@{creator.username}</p>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f8f9fb] border border-[#e2e8f0] text-[11px] font-mono text-[#64748b]">
                 <span>Wallet:</span>
-                <span className="text-white font-bold">{shortenAddress(creator.wallet)}</span>
+                <span className="text-[#1a202c] font-bold">{shortenAddress(creator.wallet)}</span>
               </div>
             </div>
           </div>
@@ -70,27 +70,27 @@ export default function CreatorProfilePage({ params }: PageProps) {
           </button>
         </div>
 
-        <p className="text-xs text-[#9eb2c9] leading-relaxed max-w-2xl">{creator.bio}</p>
+        <p className="text-xs text-[#64748b] leading-relaxed max-w-2xl">{creator.bio}</p>
 
         {/* Creator Stats */}
-        <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#1b2636]">
-          <div className="bg-[#0b1017] p-4 rounded-2xl border border-[#1b2636]">
-            <span className="text-xs text-[#788a9e] block">Total Received</span>
-            <span className="text-lg sm:text-xl font-bold text-[#7a9a14] font-mono">
+        <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#e8ecf1]">
+          <div className="bg-[#f8f9fb] p-4 rounded-2xl border border-[#e8ecf1]">
+            <span className="text-xs text-[#94a3b8] block">Total Received</span>
+            <span className="text-lg sm:text-xl font-bold text-[#5d750f] font-mono">
               {formatXlm(creator.totalReceived)}
             </span>
           </div>
 
-          <div className="bg-[#0b1017] p-4 rounded-2xl border border-[#1b2636]">
-            <span className="text-xs text-[#788a9e] block">Supporters</span>
-            <span className="text-lg sm:text-xl font-bold text-white font-mono">
+          <div className="bg-[#f8f9fb] p-4 rounded-2xl border border-[#e8ecf1]">
+            <span className="text-xs text-[#94a3b8] block">Supporters</span>
+            <span className="text-lg sm:text-xl font-bold text-[#1a202c] font-mono">
               {creator.supporterCount}
             </span>
           </div>
 
-          <div className="bg-[#0b1017] p-4 rounded-2xl border border-[#1b2636]">
-            <span className="text-xs text-[#788a9e] block">Total Tips</span>
-            <span className="text-lg sm:text-xl font-bold text-[#a3b3c7] font-mono">
+          <div className="bg-[#f8f9fb] p-4 rounded-2xl border border-[#e8ecf1]">
+            <span className="text-xs text-[#94a3b8] block">Total Tips</span>
+            <span className="text-lg sm:text-xl font-bold text-[#475569] font-mono">
               {creator.tipCount}
             </span>
           </div>
@@ -99,8 +99,8 @@ export default function CreatorProfilePage({ params }: PageProps) {
 
       {/* Quick Micro-Tip Presets */}
       <div className="matte-card p-6 space-y-4">
-        <h3 className="font-bold text-sm text-white">Send a Micro-Tip</h3>
-        <p className="text-xs text-[#8ca0b8]">
+        <h3 className="font-bold text-sm text-[#1a202c]">Send a Micro-Tip</h3>
+        <p className="text-xs text-[#64748b]">
           Select a predefined micro-amount to tip {creator.name} on Stellar Testnet:
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -114,24 +114,23 @@ export default function CreatorProfilePage({ params }: PageProps) {
             <button
               key={preset.label}
               onClick={() => setShowTipModal(true)}
-              className="p-3 rounded-2xl bg-[#0b1017] border border-[#1b2636] hover:border-[#5d750f] hover:bg-[#121924] transition-all text-center group"
+              className="p-3 rounded-2xl bg-[#f8f9fb] border border-[#e2e8f0] hover:border-[#5d750f] hover:bg-[#f0fdf0] transition-all text-center group"
             >
-              <span className="text-xs font-bold text-white block group-hover:text-[#7a9a14]">
+              <span className="text-xs font-bold text-[#1a202c] block group-hover:text-[#5d750f]">
                 {preset.label}
               </span>
-              <span className="text-[10px] text-[#64768c] font-mono">{preset.xlm}</span>
+              <span className="text-[10px] text-[#94a3b8] font-mono">{preset.xlm}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Recent Activity for this creator */}
+      {/* Recent Activity */}
       <div className="space-y-4">
-        <h3 className="font-bold text-base text-white">Recent Supporters</h3>
+        <h3 className="font-bold text-base text-[#1a202c]">Recent Supporters</h3>
         <ActivityFeed tips={recentTips} />
       </div>
 
-      {/* Tip Modal */}
       {showTipModal && (
         <TipModal creator={creator} onClose={() => setShowTipModal(false)} />
       )}

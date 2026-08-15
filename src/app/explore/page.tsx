@@ -66,30 +66,27 @@ export default function ExplorePage() {
 
   return (
     <div className="space-y-8 py-4">
-      {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-white tracking-tight">Explore Creators</h1>
-        <p className="text-xs text-[#8597ad]">
+        <h1 className="text-3xl font-bold text-[#1a202c] tracking-tight">Explore Creators</h1>
+        <p className="text-xs text-[#64748b]">
           Discover developers, artists, writers, and public goods creators on Stellar.
         </p>
       </div>
 
-      {/* Search Bar */}
       <div className="relative max-w-md">
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by name, @username, or keyword..."
-          className="input-field w-full px-4 py-3 text-xs text-white placeholder-[#536478]"
+          className="input-field w-full px-4 py-3 text-xs placeholder-[#94a3b8]"
         />
-        <span className="absolute right-3.5 top-3 text-[#536478] text-sm">🔍</span>
+        <span className="absolute right-3.5 top-3 text-[#94a3b8] text-sm">🔍</span>
       </div>
 
-      {/* Creator Grid */}
       {filteredCreators.length === 0 ? (
-        <div className="matte-card p-12 text-center text-[#788a9e]">
-          <p className="text-xs">No creators found matching "{searchTerm}"</p>
+        <div className="matte-card p-12 text-center text-[#94a3b8]">
+          <p className="text-xs">No creators found matching &quot;{searchTerm}&quot;</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -103,7 +100,6 @@ export default function ExplorePage() {
         </div>
       )}
 
-      {/* Tip Modal */}
       {selectedCreator && (
         <TipModal creator={selectedCreator} onClose={() => setSelectedCreator(null)} />
       )}

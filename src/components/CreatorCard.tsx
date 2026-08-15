@@ -1,76 +1,51 @@
 "use client";
 
 import Link from "next/link";
-import { formatXlm, Creator, shortenAddress } from "@/lib/stellar";
+import { Creator, formatXlm, shortenAddress } from "@/lib/stellar";
 
 interface CreatorCardProps {
   creator: Creator;
-  onTipClick?: (creator: Creator) => void;
+  onTipClick: (creator: Creator) => void;
 }
 
 export default function CreatorCard({ creator, onTipClick }: CreatorCardProps) {
   return (
-    <div className="matte-card-interactive p-6 flex flex-col justify-between group">
-      <div>
-        {/* Avatar & Header */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-[#1b2636] border border-[#2a3c54] flex items-center justify-center text-lg font-bold text-white uppercase">
-              {creator.name.charAt(0)}
-            </div>
-            <div>
-              <h3 className="font-bold text-sm text-white group-hover:text-[#7a9a14] transition-colors">
-                {creator.name}
-              </h3>
-              <p className="text-xs font-mono text-[#788a9e]">@{creator.username}</p>
-            </div>
-          </div>
-
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#101721] text-[#8fa0b5] border border-[#1e2a3a]">
-            {shortenAddress(creator.wallet)}
-          </span>
-        </div>
-
-        {/* Bio */}
-        <p className="text-xs text-[#9eb2c9] line-clamp-2 mb-5 leading-relaxed">
-          {creator.bio || "Building cool open-source things on Stellar."}
-        </p>
-      </div>
-
-      {/* Metrics & Tip CTA */}
-      <div>
-        <div className="grid grid-cols-2 gap-2 mb-4 bg-[#0b1017] p-3 rounded-xl border border-[#1b2636]">
-          <div>
-            <span className="text-[10px] font-medium text-[#788a9e] block">Total Received</span>
-            <span className="text-xs font-bold text-[#7a9a14] font-mono">
-              {formatXlm(creator.totalReceived)}
-            </span>
+    <div className="matte-card-interactive p-5 space-y-4">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#f0fdf0] border border-[#d4ecd4] flex items-center justify-center text-[#5d750f] font-bold text-sm">
+            {creator.name.charAt(0).toUpperCase()}
           </div>
           <div>
-            <span className="text-[10px] font-medium text-[#788a9e] block">Supporters</span>
-            <span className="text-xs font-bold text-white font-mono">
-              {creator.supporterCount}
-            </span>
+            <Link
+              href={`/creator/${creator.username}`}
+              className="font-bold text-sm text-[#1a202c] hover:text-[#5d750f] transition-colors"
+            >
+              {creator.name}
+            </Link>
+            <p className="text-[11px] font-mono text-[#94a3b8]">@{creator.username}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => onTipClick && onTipClick(creator)}
-            className="flex-1 olive-button py-2.5 px-3 text-xs flex items-center justify-center gap-1.5"
-          >
-            <span>Send Micro-Tip</span>
-            <span>→</span>
-          </button>
-
-          <Link
-            href={`/creator/${creator.username}`}
-            className="px-3.5 py-2.5 rounded-full text-xs font-medium text-[#9eb2c9] bg-[#141d28] hover:bg-[#1b2738] hover:text-white border border-[#233347] transition-colors"
-          >
-            View
-          </Link>
-        </div>
+        <span className="text-[10px] text-[#94a3b8] font-mono">{shortenAddress(creator.wallet)}</span>
       </div>
+
+      <p className="text-xs text-[#64748b] leading-relaxed line-clamp-2">{creator.bio}</p>
+
+      <div className="flex items-center gap-4 text-[11px] text-[#94a3b8] pt-1 border-t border-[#f1f5f9]">
+        <span>
+          <strong className="text-[#5d750f] font-mono">{formatXlm(creator.totalReceived)}</strong> received
+        </span>
+        <span>{creator.supporterCount} supporters</span>
+      </div>
+
+      <button
+        onClick={() => onTipClick(creator)}
+        className="olive-button w-full py-2.5 text-xs flex items-center justify-center gap-1.5"
+      >
+        <span>Send Micro-Tip</span>
+        <span>→</span>
+      </button>
     </div>
   );
 }

@@ -103,35 +103,35 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#0c1117] border border-[#1b2636] w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
+      <div className="bg-white border border-[#e2e8f0] w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-[#788a9e] hover:text-white text-xs font-bold px-2.5 py-1 rounded-full bg-[#141d27] border border-[#212f42]"
+          className="absolute top-4 right-4 text-[#94a3b8] hover:text-[#1a202c] text-xs font-bold px-2.5 py-1 rounded-full bg-[#f1f5f9] border border-[#e2e8f0]"
         >
           ✕
         </button>
 
         {txHash ? (
           <div className="text-center py-6 space-y-4">
-            <div className="w-14 h-14 rounded-full bg-[#5d750f]/20 border border-[#5d750f]/40 text-[#7a9a14] text-2xl flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-[#f0fdf0] border border-[#d4ecd4] text-[#5d750f] text-2xl flex items-center justify-center mx-auto">
               ✓
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white mb-1">Micro-Tip Complete</h3>
-              <p className="text-xs text-[#8c9cb0]">
-                Sent <span className="font-bold text-white font-mono">{selectedXlm} XLM</span> to{" "}
-                <span className="text-[#7a9a14]">@{creator.username}</span> on Stellar Testnet.
+              <h3 className="text-lg font-bold text-[#1a202c] mb-1">Micro-Tip Complete</h3>
+              <p className="text-xs text-[#64748b]">
+                Sent <span className="font-bold text-[#1a202c] font-mono">{selectedXlm} XLM</span> to{" "}
+                <span className="text-[#5d750f]">@{creator.username}</span> on Stellar Testnet.
               </p>
             </div>
 
-            <div className="bg-[#080c12] p-3 rounded-2xl border border-[#1a2536] text-left font-mono text-[11px]">
-              <span className="text-[#64768c] block mb-1">Transaction Hash:</span>
+            <div className="bg-[#f8f9fb] p-3 rounded-2xl border border-[#e2e8f0] text-left font-mono text-[11px]">
+              <span className="text-[#94a3b8] block mb-1">Transaction Hash:</span>
               <a
                 href={`https://stellar.expert/explorer/testnet/tx/${txHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#7a9a14] hover:underline break-all block"
+                className="text-[#5d750f] hover:underline break-all block"
               >
                 {txHash} ↗
               </a>
@@ -144,23 +144,23 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
         ) : (
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#172230] border border-[#27384e] flex items-center justify-center text-white font-bold text-base">
+              <div className="w-10 h-10 rounded-xl bg-[#f0fdf0] border border-[#d4ecd4] flex items-center justify-center text-[#5d750f] font-bold text-base">
                 {creator.name.charAt(0)}
               </div>
               <div>
-                <h3 className="font-bold text-base text-white">Send Tip to {creator.name}</h3>
-                <p className="text-xs font-mono text-[#788a9e]">@{creator.username}</p>
+                <h3 className="font-bold text-base text-[#1a202c]">Send Tip to {creator.name}</h3>
+                <p className="text-xs font-mono text-[#94a3b8]">@{creator.username}</p>
               </div>
             </div>
 
             {errorMsg && (
-              <div className="p-3.5 rounded-2xl bg-[#2a1114] border border-[#5c1a20] text-rose-400 text-xs">
+              <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs">
                 {errorMsg}
               </div>
             )}
 
             <div>
-              <label className="text-xs font-medium text-[#9eb2c9] block mb-2">
+              <label className="text-xs font-medium text-[#475569] block mb-2">
                 Select Micro-Tip Amount:
               </label>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
@@ -171,8 +171,8 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
                     onClick={() => setSelectedXlm(preset.xlm)}
                     className={`py-2 px-1 rounded-xl text-center border transition-all ${
                       selectedXlm === preset.xlm
-                        ? "bg-[#5d750f] border-[#7a9a14] text-white font-bold"
-                        : "bg-[#0b1017] border-[#1f2d3d] text-[#8ca0b8] hover:bg-[#141d28]"
+                        ? "bg-[#5d750f] border-[#5d750f] text-white font-bold"
+                        : "bg-[#f8f9fb] border-[#e2e8f0] text-[#475569] hover:bg-[#f1f5f9]"
                     }`}
                   >
                     <span className="text-xs block font-bold">{preset.label}</span>
@@ -183,7 +183,7 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
             </div>
 
             <div>
-              <label className="text-xs font-medium text-[#9eb2c9] block mb-1.5">
+              <label className="text-xs font-medium text-[#475569] block mb-1.5">
                 Support Message (Optional):
               </label>
               <input
@@ -191,7 +191,7 @@ export default function TipModal({ creator, onClose, onSuccess }: TipModalProps)
                 value={customMessage}
                 onChange={(e) => setCustomMessage(e.target.value)}
                 placeholder="Keep building awesome stuff! 🚀"
-                className="input-field w-full px-3.5 py-2.5 text-xs text-white placeholder-[#506073]"
+                className="input-field w-full px-3.5 py-2.5 text-xs placeholder-[#94a3b8]"
               />
             </div>
 
