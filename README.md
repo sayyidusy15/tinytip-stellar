@@ -3,7 +3,11 @@ a
 <div align="center">
   <span style="font-size: 64px;">✨</span>
   <h1>TinyTip</h1>
-  <p>Small tips. Real impact. On-chain micro-support platform for Stellar Testnet.</p>
+  <a href="https://github.com/sayyidusy15/tinytip-stellar/actions"><img src="https://github.com/sayyidusy15/tinytip-stellar/workflows/Smart%20Contract%20CI/badge.svg" alt="Smart Contract CI"></a>
+  <img src="https://img.shields.io/badge/tests-5%20passed-22c55e.svg" alt="Unit Tests">
+  <img src="https://img.shields.io/badge/chain-Stellar%20Testnet-7c3aed.svg" alt="Stellar Testnet">
+  <img src="https://img.shields.io/badge/contracts-Soroban%20Rust-111827.svg" alt="Soroban Rust">
+</div>
 
 ---
 
