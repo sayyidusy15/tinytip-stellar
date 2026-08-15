@@ -43,11 +43,17 @@ export function formatPrice(price: bigint | number): string {
   return formatXlm(price);
 }
 
+/**
+ * Shortens a 56-character Stellar public address for display (e.g. GAMC...CBY2)
+ */
 export function shortenAddress(address: string): string {
   if (!address || address.length <= 12) return address || "";
   return `${address.slice(0, 4)}...${address.slice(-4)}`;
 }
 
+/**
+ * Validates whether a given string is a valid Stellar public key (starts with G, 56 characters)
+ */
 export function isValidStellarAddress(address: string): boolean {
   return typeof address === "string" && address.startsWith("G") && address.length === 56;
 }
