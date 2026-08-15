@@ -1,14 +1,9 @@
+a
+
 <div align="center">
   <span style="font-size: 64px;">✨</span>
   <h1>TinyTip</h1>
   <p>Small tips. Real impact. On-chain micro-support platform for Stellar Testnet.</p>
-
-  <a href="https://stellar.expert/explorer/testnet/contract/CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH"><img src="https://img.shields.io/badge/contract-Stellar%20Testnet-7D00FF.svg" alt="Stellar Testnet"></a>
-  <img src="https://img.shields.io/badge/smart%20contract-Soroban-000000.svg" alt="Soroban">
-  <img src="https://img.shields.io/badge/frontend-Next.js%2016-black.svg" alt="Next.js 16">
-  <img src="https://img.shields.io/badge/wallet-Freighter-f59e0b.svg" alt="Freighter">
-  <img src="https://img.shields.io/badge/tests-100%25%20pass-22c55e.svg" alt="Tests">
-</div>
 
 ---
 
@@ -141,13 +136,13 @@ flowchart LR
 
 Soroban Rust contract exported functions:
 
-| Method | Parameters | Description |
-| --- | --- | --- |
-| `register_creator` | `username, name, bio, wallet` | Registers a creator profile on-chain |
-| `send_tip` | `donor, creator_username, amount, message` | Executes tip, updates stats, & emits `TIP_RECEIVED` event |
-| `get_creator` | `username` | Retrieves profile stats for a specific creator |
-| `get_all_creators` | None | Returns all registered creator profiles |
-| `get_recent_tips` | None | Returns latest tip records across the platform |
+| Method               | Parameters                                   | Description                                                |
+| -------------------- | -------------------------------------------- | ---------------------------------------------------------- |
+| `register_creator` | `username, name, bio, wallet`              | Registers a creator profile on-chain                       |
+| `send_tip`         | `donor, creator_username, amount, message` | Executes tip, updates stats, & emits`TIP_RECEIVED` event |
+| `get_creator`      | `username`                                 | Retrieves profile stats for a specific creator             |
+| `get_all_creators` | None                                         | Returns all registered creator profiles                    |
+| `get_recent_tips`  | None                                         | Returns latest tip records across the platform             |
 
 ---
 
@@ -187,13 +182,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deployed Smart Contract Details
 
-| Field | Value |
-| --- | --- |
-| **Network** | Stellar Soroban Testnet |
-| **Contract ID** | `CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH` |
-| **Deployer Account** | `sayyidusy` (`GA22G44TKSBBH325D2JONN5AES33FDZKB33JZATM6P3R3V3WVMHHE3IH`) |
+| Field                             | Value                                                                                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Network**                 | Stellar Soroban Testnet                                                                                                                   |
+| **Contract ID**             | `CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH`                                                                              |
+| **Deployer Account**        | `sayyidusy` (`GA22G44TKSBBH325D2JONN5AES33FDZKB33JZATM6P3R3V3WVMHHE3IH`)                                                              |
 | **Stellar Expert Explorer** | [View Contract ID CA54Q...PSDH](https://stellar.expert/explorer/testnet/contract/CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH) |
-| **Stellar Lab Explorer** | [View Contract ID on Stellar Lab](https://lab.stellar.org/r/testnet/contract/CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH) |
+| **Stellar Lab Explorer**    | [View Contract ID on Stellar Lab](https://lab.stellar.org/r/testnet/contract/CA54QDAYDLAUENAJYIELIYFFTPC7OAXOVNL5B4DEME3NWOTTTWZ2PSDH)     |
 
 ---
 
@@ -211,13 +206,13 @@ npm run build
 
 Expected results:
 
-| Check | Status | Details |
-| --- | --- | --- |
-| Soroban Rust Unit Tests | ✅ Pass | 2 passing tests (`test_register_and_get_creator`, `test_send_tip`) |
-| WASM Contract Compilation | ✅ Pass | `notes.wasm` (6,655 bytes) compiled cleanly |
-| Stellar Testnet Deployment | ✅ Pass | Deployed to `CA54Q...PSDH` via `sayyidusy` |
-| TypeScript Typecheck | ✅ Pass | 0 errors |
-| Next.js Production Build | ✅ Pass | 6 static & dynamic pages rendered cleanly |
+| Check                      | Status  | Details                                                                |
+| -------------------------- | ------- | ---------------------------------------------------------------------- |
+| Soroban Rust Unit Tests    | ✅ Pass | 2 passing tests (`test_register_and_get_creator`, `test_send_tip`) |
+| WASM Contract Compilation  | ✅ Pass | `notes.wasm` (6,655 bytes) compiled cleanly                          |
+| Stellar Testnet Deployment | ✅ Pass | Deployed to`CA54Q...PSDH` via `sayyidusy`                          |
+| TypeScript Typecheck       | ✅ Pass | 0 errors                                                               |
+| Next.js Production Build   | ✅ Pass | 6 static & dynamic pages rendered cleanly                              |
 
 ---
 
