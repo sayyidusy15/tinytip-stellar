@@ -24,20 +24,20 @@ Instead of traditional crowdfunding or credit-card payment gateways that charge 
 
 ### 🎨 User Interface Highlights
 
-| Halaman / Fitur | Preview | Deskripsi |
+| Page / Feature | Preview | Description |
 |---|---|---|
-| **Landing Page** | ![Landing Page](public/landing-page.png) | Halaman utama dengan hero section, metrik real-time Stellar, daftar featured creators, dan activity feed. |
-| **Explore Creators** | ![Explore Creators](public/explore-creators.png) | Katalog pencarian kreator berbasis kata kunci, nama, atau username `@` dengan kartu interaktif. |
-| **Creator Profile & Tip Modal** | ![Creator View](public/creator-view.png) | Profil publik kreator dengan statistik total diterima, statistik pendukung, dan preset micro-tip ($0.05 - $1.00). |
-| **Creator Dashboard** | ![Dashboard](public/dashboard.png) | Dashboard analitik kreator untuk memantau total tip, rata-rata micro-tip, dan link publik yang bisa disebar. |
-| **Connect Wallet** | ![Connect Wallet](public/connect-wallet.png) | Alur koneksi wallet Freighter otomatis & mode *View-Only* manual entry tanpa perlu ekstensi. |
+| **Landing Page** | ![Landing Page](public/landing-page.png) | Home page featuring hero section, real-time Stellar metrics, featured creators directory, and live activity ticker. |
+| **Explore Creators** | ![Explore Creators](public/explore-creators.png) | Keyword search directory for creators by name, bio, or `@username` with interactive cards. |
+| **Creator Profile & Tip Modal** | ![Creator View](public/creator-view.png) | Public creator profile displaying total XLM received, supporters count, and micro-tip presets ($0.05 - $1.00). |
+| **Creator Dashboard** | ![Dashboard](public/dashboard.png) | Creator analytics dashboard monitoring total tips, average tip size, and shareable public profile URL. |
+| **Connect Wallet** | ![Connect Wallet](public/connect-wallet.png) | Seamless 1-click Freighter wallet connection & manual address entry (View-Only mode). |
 
 ### 🛠️ Technical & CI/CD Verification
 
-| Jenis Bukti | Preview | Keterangan |
+| Verification Evidence | Preview | Details |
 |---|---|---|
-| **GitHub Actions CI/CD Pipeline** | ![CI/CD Pipeline](public/cicd-pipeline.png) | Workflow otomatis `Smart Contract CI` berstatus **SUCCESS (Ceklis Hijau `✓`)** pada setiap push ke branch `main`. |
-| **Cargo Test Output (5 Passed)** | ![Cargo Test Output](public/cargo-test.png) | Output pengujian unit test Rust Soroban di terminal dengan **5 unit test passed (100% lulus)** tanpa warning. |
+| **GitHub Actions CI/CD Pipeline** | ![CI/CD Pipeline](public/cicd-pipeline.png) | Automated `Smart Contract CI` workflow running on push/PR with **SUCCESS status (`✓`)**. |
+| **Cargo Test Output (5 Passed)** | ![Cargo Test Output](public/cargo-test.png) | Soroban Rust smart contract unit test execution output in terminal showing **5 passed tests (100% passing)** with zero warnings. |
 
 ---
 
