@@ -231,6 +231,7 @@ Expected results:
 
 | Check                      | Status  | Details                                                                    |
 | -------------------------- | ------- | -------------------------------------------------------------------------- |
+| GitHub Actions CI Pipeline | ✅ Pass | `Smart Contract CI` automated build & test workflow passing (`✓`)         |
 | Soroban Rust Unit Tests    | ✅ Pass | 5 passing tests (`test_register_and_get_creator`, `test_send_tip`, etc.)  |
 | WASM Contract Compilation  | ✅ Pass | `notes.wasm` (6,655 bytes) compiled cleanly                              |
 | Stellar Testnet Deployment | ✅ Pass | Deployed to `CA54Q...PSDH` via `sayyidusy`                                 |
