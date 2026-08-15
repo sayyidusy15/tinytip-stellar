@@ -68,8 +68,8 @@ export default function ExplorePage() {
     <div className="space-y-8 py-4">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-extrabold text-white">Explore Creators</h1>
-        <p className="text-xs text-zinc-400">
+        <h1 className="text-3xl font-bold text-white tracking-tight">Explore Creators</h1>
+        <p className="text-xs text-[#8597ad]">
           Discover developers, artists, writers, and public goods creators on Stellar.
         </p>
       </div>
@@ -81,15 +81,15 @@ export default function ExplorePage() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by name, @username, or keyword..."
-          className="w-full bg-zinc-900/80 border border-zinc-800 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50"
+          className="input-field w-full px-4 py-3 text-xs text-white placeholder-[#536478]"
         />
-        <span className="absolute right-3.5 top-3 text-zinc-500 text-sm">🔍</span>
+        <span className="absolute right-3.5 top-3 text-[#536478] text-sm">🔍</span>
       </div>
 
       {/* Creator Grid */}
       {filteredCreators.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center text-zinc-400">
-          <p className="text-sm">No creators found matching "{searchTerm}"</p>
+        <div className="matte-card p-12 text-center text-[#788a9e]">
+          <p className="text-xs">No creators found matching "{searchTerm}"</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
