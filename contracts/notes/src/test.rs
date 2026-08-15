@@ -17,7 +17,10 @@ fn test_register_and_get_creator() {
     let bio = String::from_str(&env, "Building tools for developers");
 
     let res = client.register_creator(&username, &name, &bio, &creator_wallet);
-    assert_eq!(res, String::from_str(&env, "Creator registered successfully"));
+    assert_eq!(
+        res,
+        String::from_str(&env, "Creator registered successfully")
+    );
 
     let creators = client.get_creator(&username);
     assert_eq!(creators.len(), 1);
@@ -124,9 +127,24 @@ fn test_multiple_tips_accumulation() {
     let donor1 = Address::generate(&env);
     let donor2 = Address::generate(&env);
 
-    client.send_tip(&donor1, &username, &100_0000000_u128, &String::from_str(&env, "Tip 1"));
-    client.send_tip(&donor2, &username, &200_0000000_u128, &String::from_str(&env, "Tip 2"));
-    client.send_tip(&donor1, &username, &50_0000000_u128, &String::from_str(&env, "Tip 3"));
+    client.send_tip(
+        &donor1,
+        &username,
+        &100_0000000_u128,
+        &String::from_str(&env, "Tip 1"),
+    );
+    client.send_tip(
+        &donor2,
+        &username,
+        &200_0000000_u128,
+        &String::from_str(&env, "Tip 2"),
+    );
+    client.send_tip(
+        &donor1,
+        &username,
+        &50_0000000_u128,
+        &String::from_str(&env, "Tip 3"),
+    );
 
     let creators = client.get_creator(&username);
     let creator = creators.get(0).unwrap();
