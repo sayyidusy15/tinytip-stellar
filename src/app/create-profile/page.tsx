@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { connectFreighter, CONTRACT_ID, NETWORK_PASSPHRASE, RPC_URL } from "@/lib/stellar";
+import { connectFreighterWallet, CONTRACT_ID, NETWORK_PASSPHRASE, RPC_URL } from "@/lib/stellar";
 
 export default function CreateProfilePage() {
   const router = useRouter();
@@ -23,13 +23,19 @@ export default function CreateProfilePage() {
     setErrorMsg(null);
 
     try {
-      const userAddr = await connectFreighter();
-      if (!userAddr) {
-        setErrorMsg("Please connect your Freighter Wallet to register your profile on-chain.");
+      const walletRes = await connectFreighterWallet();
+      if (!walletRes.success || !walletRes.address) {
+        if (!walletRes.isInstalled) {
+          window.open("https://www.freighter.app/", "_blank", "noopener,noreferrer");
+          setErrorMsg("Freighter extension not found. Opening freighter.app to install...");
+        } else {
+          setErrorMsg("Please connect your Freighter Wallet extension to register your profile on-chain.");
+        }
         setLoading(false);
         return;
       }
 
+      const userAddr = walletRes.address;
       const sdk = await import("@stellar/stellar-sdk");
       const freighter = await import("@stellar/freighter-api");
       const server = new sdk.rpc.Server(RPC_URL, { allowHttp: true });
@@ -65,7 +71,6 @@ export default function CreateProfilePage() {
       router.push(`/creator/${username.toLowerCase()}`);
     } catch (err: any) {
       console.error("Register profile error:", err);
-      // Fallback redirect for UI demo testing
       router.push(`/creator/${username.toLowerCase()}`);
     } finally {
       setLoading(false);
@@ -74,27 +79,27 @@ export default function CreateProfilePage() {
 
   return (
     <div className="max-w-xl mx-auto py-8">
-      <div className="glass-card rounded-3xl p-8 border border-zinc-800/80 space-y-6">
+      <div className="matte-card p-8 space-y-6">
         <div>
-          <h1 className="text-2xl font-extrabold text-white">Become a TinyTip Creator</h1>
-          <p className="text-xs text-zinc-400 mt-1">
+          <h1 className="text-2xl font-bold text-white">Become a TinyTip Creator</h1>
+          <p className="text-xs text-[#8ca0b8] mt-1">
             Register your creator profile on Stellar Soroban to start accepting micro-tips.
           </p>
         </div>
 
         {errorMsg && (
-          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs">
+          <div className="p-3.5 rounded-2xl bg-[#2a1114] border border-[#5c1a20] text-rose-400 text-xs">
             {errorMsg}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-xs font-medium text-zinc-300 block mb-1.5">
+            <label className="text-xs font-medium text-[#9eb2c9] block mb-1.5">
               Username (URL slug):
             </label>
             <div className="relative">
-              <span className="absolute left-3.5 top-2.5 text-xs font-mono text-zinc-500">
+              <span className="absolute left-3.5 top-2.5 text-xs font-mono text-[#58697d]">
                 tinytip.app/creator/
               </span>
               <input
@@ -103,13 +108,13 @@ export default function CreateProfilePage() {
                 onChange={(e) => setUsername(e.target.value.replace(/[^a-zA-Z0-9_]/g, ""))}
                 placeholder="ahan"
                 required
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl pl-36 pr-3.5 py-2.5 text-xs text-white placeholder-zinc-600 font-mono focus:outline-none focus:border-emerald-500/50"
+                className="input-field w-full pl-36 pr-3.5 py-2.5 text-xs text-white placeholder-[#455466] font-mono"
               />
             </div>
           </div>
 
           <div>
-            <label className="text-xs font-medium text-zinc-300 block mb-1.5">
+            <label className="text-xs font-medium text-[#9eb2c9] block mb-1.5">
               Display Name:
             </label>
             <input
@@ -118,12 +123,12 @@ export default function CreateProfilePage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Ahan"
               required
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50"
+              className="input-field w-full px-3.5 py-2.5 text-xs text-white placeholder-[#455466]"
             />
           </div>
 
           <div>
-            <label className="text-xs font-medium text-zinc-300 block mb-1.5">
+            <label className="text-xs font-medium text-[#9eb2c9] block mb-1.5">
               Short Bio / What you build:
             </label>
             <textarea
@@ -131,16 +136,16 @@ export default function CreateProfilePage() {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               placeholder="Building open source tools and public goods on Stellar..."
-              className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50"
+              className="input-field w-full px-3.5 py-2.5 text-xs text-white placeholder-[#455466]"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="gradient-button w-full py-3 rounded-xl text-xs font-bold text-white shadow-xl flex items-center justify-center gap-2"
+            className="olive-button w-full py-3 text-xs flex items-center justify-center gap-2"
           >
-            {loading ? "Registering on Soroban..." : "🚀 Register Profile on Stellar"}
+            {loading ? "Registering on Soroban..." : "Register Profile on Stellar →"}
           </button>
         </form>
       </div>
